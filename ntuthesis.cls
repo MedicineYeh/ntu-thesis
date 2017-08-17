@@ -9,7 +9,7 @@
 % ----------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ntuthesis}[2013/04/23 Thesis template for National Taiwan University]
+\ProvidesClass{ntuthesis}[2017/09/01 Thesis template for National Taiwan University]
 
 % Derived from book class
 \DeclareRobustCommand{\@typeen}{Master}
@@ -23,13 +23,57 @@
 \DeclareOption{onehalfspacing}{\gdef\@setspacing{\onehalfspacing}}
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
 \ProcessOptions\relax
-\LoadClass[a4paper,12pt]{book}
+\LoadClass[a4paper,openany,12pt]{book}
 
 % Required packages
 \RequirePackage[top=2cm,left=3cm,bottom=3cm,right=3cm]{geometry}
 \RequirePackage{xeCJK}
 \RequirePackage{setspace}
 \RequirePackage[contents={}]{background}
+
+% Use packages
+\usepackage{etoolbox}
+\usepackage{fontspec}
+\usepackage{indentfirst}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{wallpaper}
+\usepackage{verbatim}
+
+% Custom commands
+\DeclareRobustCommand{\setMainFont}[1]{
+    \@ifundefined{IfFontExistsTF}{}{\IfFontExistsTF{#1}{\setmainfont{#1}}}
+}
+\DeclareRobustCommand{\setChineseFont}[1]{
+    \@ifundefined{IfFontExistsTF}{}{\IfFontExistsTF{#1}{\setCJKmainfont{#1}}}
+}
+
+% Set watermark
+\IfFileExists{watermark.pdf}
+{
+    \CenterWallPaper{0.174}{watermark.pdf}
+    \setlength{\wpXoffset}{6.1725cm}
+    \setlength{\wpYoffset}{10.5225cm}
+}
+
+% Set fonts
+\setMainFont{Times New Roman}
+\setChineseFont{標楷體}
+% Using the tex-text mapping for ligatures etc.
+\defaultfontfeatures{Mapping=tex-text}
+
+% Set up fonts for overleaf online editor (Google fonts)
+% IfFontExistsTF is undefined on overleaf, use this to detect the environment
+\@ifundefined{IfFontExistsTF}
+{
+    \setCJKmainfont[
+    BoldFont={cwTeXHeiBold},
+    ItalicFont={cwTeXKai}]
+    {cwTeXMing}
+    \setCJKsansfont{cwTeXHei}
+    \setCJKmonofont{cwTeXYen}
+}
 
 % Declarations
 \DeclareRobustCommand{\university}[2]{\gdef\@universityen{#1}\gdef\@universityzh{#2}}
@@ -173,7 +217,7 @@
   \addcontentsline{toc}{chapter}{口試委員會審定書}
   \vspace{1cm}
   \fontsize{15}{24}\selectfont
-\hspace{30pt}本論文係\@authorzh{}君 (\@studentid)
+\hspace{30pt}本論文係\@authorzh{}君 (學號\@studentid)
 在\@universityzh\@institutezh{}完成之\@typezh{}學位\@classzh，%
 於民國 \@yearzh 年 \@monthzh 月 \@day 日%
 承下列考試委員審查通過及口試及格，特此證明\par

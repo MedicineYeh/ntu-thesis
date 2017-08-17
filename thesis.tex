@@ -1,33 +1,57 @@
 \documentclass{ntuthesis}
 
-\usepackage{times}
-\usepackage{verbatim}
-\usepackage{color}
-\usepackage{url}
-\usepackage{graphicx}
+\usepackage{fancyhdr}
+\usepackage[normalem]{ulem}
+\usepackage[hyphens]{url}
+%\usepackage[sort,nocompress]{cite}
+\usepackage[toc,page]{appendix}
+% Always include hyperref last
+\usepackage[colorlinks=false,unicode]{hyperref}
+
+% My packages
+\usepackage{graphics}
+\usepackage{multirow}     %for table
+\usepackage{subfigure}    %for figure
+\usepackage{tabularx}
 \usepackage{array}
-\usepackage{wallpaper} 
+\usepackage{tabulary}
+\newcolumntype{K}[1]{>{\centering\arraybackslash}m{#1}}
 
-% Using the tex-text mapping for ligatures etc.
-\defaultfontfeatures{Mapping=tex-text}
+\usepackage{listings}
+\usepackage{color}
 
-% Set the default fonts
-\setmainfont{Times New Roman}
-\setCJKmainfont{標楷體}
+\definecolor{dkgreen}{rgb}{0,0.6,0}
+\definecolor{gray}{rgb}{0.5,0.5,0.5}
+\definecolor{mauve}{rgb}{0.58,0,0.82}
 
-\ifdefined\withwatermark
-  \CenterWallPaper{0.174}{watermark.pdf}
-  \setlength{\wpXoffset}{6.1725cm}
-  \setlength{\wpYoffset}{10.5225cm}
-\fi
+\lstset{frame=tb,
+  language=C++,
+  aboveskip=3mm,
+  belowskip=3mm,
+  showstringspaces=false,
+  columns=flexible,
+  basicstyle={\small\ttfamily},
+  numbers=none,
+  numberstyle=\tiny\color{gray},
+  keywordstyle=\color{blue},
+  commentstyle=\color{dkgreen},
+  stringstyle=\color{mauve},
+  breaklines=true,
+  breakatwhitespace=true,
+  tabsize=3
+}
+% End of my packages
 
-% digital object identifier
-\ifdefined\withdoi
-  \insertdoi
-\fi
+% Set the possible fonts (Un-comment this line and set to the right font family you have)
+\setChineseFont{TW-MOE-Std-Kai}
 
 % Your information goes here
 \input{ntuvars}
+
+% digital object identifier
+\ifdefined\withdoi
+    \insertdoi
+\fi
 
 \begin{document}
 
@@ -37,8 +61,8 @@
 
 \makecertification
 
-\input{acknowledgements}
-\input{abstract}
+\input{chapters/acknowledgements}
+\input{chapters/abstract}
 
 \tableofcontents
 \listoffigures
@@ -47,12 +71,11 @@
 \mainmatter
 
 % Your thesis goes here
-\input{introduction}
-%\input{related}
-%\input{photoshoot}
-%\input{modeling}
-%\input{application}
-%\input{conclusion}
+\input{chapters/chap1-introduction}
+%\input{chapters/chap2-relatedworks}
+%\input{chapters/chap3-architecture}
+%\input{chapters/chap4-experiments}
+%\input{chapters/chap5-conclusion}
 
 \appendix
 
