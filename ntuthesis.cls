@@ -58,23 +58,11 @@
     \setlength{\wpYoffset}{10.5225cm}
 }
 
-% Set fonts
+% Try to set fonts
 \setMainFont{Times New Roman}
 \setChineseFont{標楷體}
 % Using the tex-text mapping for ligatures etc.
 \defaultfontfeatures{Mapping=tex-text}
-
-% Set up fonts for overleaf online editor (Google fonts)
-% IfFontExistsTF is undefined on overleaf, use this to detect the environment
-\@ifundefined{IfFontExistsTF}
-{
-    \setCJKmainfont[
-    BoldFont={cwTeXHeiBold},
-    ItalicFont={cwTeXKai}]
-    {cwTeXMing}
-    \setCJKsansfont{cwTeXHei}
-    \setCJKmonofont{cwTeXYen}
-}
 
 % Declarations
 \DeclareRobustCommand{\university}[2]{\gdef\@universityen{#1}\gdef\@universityzh{#2}}
@@ -90,6 +78,7 @@
 \DeclareRobustCommand{\abstractname}[2]{\gdef\@abstractnameen{#1}\gdef\@abstractnamezh{#2}}
 \DeclareRobustCommand{\acknowledgements}[2]{\gdef\@acknowledgementsen{#1}\gdef\@acknowledgementszh{#2}}
 \DeclareRobustCommand{\doi}[1]{\gdef\@doi{#1}}
+\DeclareRobustCommand{\keywords}[2]{\gdef\@keywordsen{#1}\gdef\@keywordszh{#2}}
 
 \abstractname{Abstract}{摘要}
 \acknowledgements{Acknowledgements}{誌謝}
@@ -208,6 +197,7 @@
 
 \DeclareRobustCommand{\makecertification}{
   \if@openright\cleardoublepage\else\clearpage\fi
+  \thispagestyle{empty}
   \begin{singlespace}
   \begin{center}
     \fontsize{24}{36}\selectfont\@universityzh\@typezh{}學位\@classzh\\
@@ -247,11 +237,19 @@
    \quotation}
   {\endquotation}
 
-\newenvironment{abstracten}{\begin{quotationpage}{\@abstractnameen}}{\end{quotationpage}}
-\newenvironment{abstractzh}{\begin{quotationpage}{\@abstractnamezh}}{\end{quotationpage}}
+\newenvironment{abstracten}
+  {\begin{quotationpage}{\@abstractnameen}}
+  {\hfill\break\textbf{Keywords: }\@keywordsen\end{quotationpage}}
+\newenvironment{abstractzh}
+  {\begin{quotationpage}{\@abstractnamezh}}
+  {\hfill\break\textbf{關鍵字：}\@keywordszh\end{quotationpage}}
 \newenvironment{acknowledgementsen}{\begin{quotationpage}{\@acknowledgementsen}}{\end{quotationpage}}
 \newenvironment{acknowledgementszh}{\begin{quotationpage}{\@acknowledgementszh}}{\end{quotationpage}}
 
 \setcounter{tocdepth}{2}
 \pagestyle{plain}
 \@setspacing
+
+% Setup doi
+\insertdoi
+

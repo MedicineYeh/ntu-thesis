@@ -1,24 +1,40 @@
 \documentclass{ntuthesis}
 
-\usepackage{fancyhdr}
-\usepackage[normalem]{ulem}
-\usepackage[hyphens]{url}
-%\usepackage[sort,nocompress]{cite}
-\usepackage[toc,page]{appendix}
+\usepackage{fancyhdr}              % Extensive control of page headers and footers
+\usepackage[normalem]{ulem}        % Package for underlining
+\usepackage[hyphens]{url}          % URL wrapper with break on hypthens
+\usepackage{pdfpages}              % PDF page inseration
+%\usepackage[sort,nocompress]{cite} % Sort the citations
+\usepackage[toc,page]{appendix}    % Extra control of appendices
 % Always include hyperref last
-\usepackage[colorlinks=false,unicode]{hyperref}
+\usepackage[colorlinks=false,unicode]{hyperref} % Generating bookmarks and links in PDF file
+
+% Solving the bug of conflict in xeCJK with listing (should be fixed in the near future)
+% https://github.com/CTeX-org/ctex-kit/issues/297
+\ExplSyntaxOn
+\bool_new:N \l__xeCJK_listings_letter_bool
+\ExplSyntaxOff
+% End of solving bugs
 
 % My packages
-\usepackage{graphics}
-\usepackage{multirow}     %for table
-\usepackage{subfigure}    %for figure
-\usepackage{tabularx}
-\usepackage{array}
-\usepackage{tabulary}
-\newcolumntype{K}[1]{>{\centering\arraybackslash}m{#1}}
+% READMORE
+% https://tex.stackexchange.com/questions/12672/which-tabular-packages-do-which-tasks-and-which-packages-conflict
+\usepackage{caption}    % captionof for assigning subfigure in minipage
+\usepackage{graphics}   % includegraphics
+\usepackage{subfigure}  % for figure
+\usepackage{tabularx}   % Provides a column type which expands to fill the specified width of the table
+\usepackage{array}      % offers more flexible column formatting; fixes to some spacing issues
+\usepackage{tabulary}   % Provides column types which are proportional to the natural width of their contents
+\usepackage{multirow}   % Lets tabular material span multiple rows
+\usepackage{booktabs}   % Supports professional looking tables; better vertical spacing; better rules
+\usepackage{makecell}   % Multiple line cells, better headers, thick lines, diagonally divided cells, etc.
+\newcolumntype{K}[1]{>{\centering\arraybackslash}m{#1}} % Convenient column type
 
-\usepackage{listings}
-\usepackage{color}
+% These are all for programing languages
+\usepackage{algorithm, algorithmicx, algpseudocode} % Pseudo Code
+\usepackage{minted}     % Using external tools to render codes
+\usepackage{listings}   % listing is an alternative solution for colored codes
+\usepackage{color}      % color macros
 
 \definecolor{dkgreen}{rgb}{0,0.6,0}
 \definecolor{gray}{rgb}{0.5,0.5,0.5}
@@ -42,16 +58,8 @@
 }
 % End of my packages
 
-% Set the possible fonts (Un-comment this line and set to the right font family you have)
-\setChineseFont{TW-MOE-Std-Kai}
-
 % Your information goes here
 \input{ntuvars}
-
-% digital object identifier
-\ifdefined\withdoi
-    \insertdoi
-\fi
 
 \begin{document}
 
@@ -59,7 +67,15 @@
 
 \makecover
 
-\makecertification
+\IfFileExists{certification.pdf}
+{
+    \includepdf{certification.pdf}
+}
+{
+    \makecertification
+}
+
+\setcounter{page}{1} % Reset page number
 
 \input{chapters/acknowledgements}
 \input{chapters/abstract}
@@ -73,8 +89,8 @@
 % Your thesis goes here
 \input{chapters/chap1-introduction}
 %\input{chapters/chap2-relatedworks}
-%\input{chapters/chap3-architecture}
-%\input{chapters/chap4-experiments}
+%\input{chapters/chap3-implementations}
+%\input{chapters/chap4-evaluations}
 %\input{chapters/chap5-conclusion}
 
 \appendix

@@ -16,17 +16,18 @@ ifdef DOI
 TEXFLAG+="\def\withdoi{1} "
 endif
 
-TEXFLAG+="\input{$(MAIN)}"
+TEXFLAG+="\input{$(MAIN)} "
 
 watermark.pdf:
 	wget $(NTU_WATERMARK_LINK) -O watermark.pdf
 
-$(MAIN).pdf: *.tex ntuthesis.cls watermark.pdf
-	$(LATEX) $(TEXFLAG) $(MAIN) < /dev/null
+$(MAIN).pdf: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf certification.pdf
+	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
 	$(BIBTEX) $(MAIN)
-	$(LATEX) $(TEXFLAG) $(MAIN) < /dev/null
-	$(LATEX) $(TEXFLAG) $(MAIN) < /dev/null
+	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
+	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
 
 clean:
 	rm -f $(CLEANABLE) $(MAIN).pdf
+	rm -rf _minted-*
 

@@ -10,6 +10,7 @@ thesis.pdf
 ./*.pdf
 
 ### LaTeX ###
+_minted-*
 *.acn
 *.acr
 *.alg
