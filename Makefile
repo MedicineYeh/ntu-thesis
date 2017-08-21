@@ -27,8 +27,8 @@ $(MAIN)-with-pass.pdf: $(MAIN).pdf
 endif
 
 update: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
-	$(BIBTEX) $(MAIN)
 	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
+	$(BIBTEX) $(MAIN)
 
 clean:
 	rm -f $(CLEANABLE) $(MAIN).pdf

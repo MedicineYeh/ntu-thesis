@@ -41,6 +41,16 @@
 \usepackage{amsfonts}
 \usepackage{wallpaper}
 \usepackage{verbatim}
+\usepackage{lipsum}    % http://ctan.org/pkg/lipsum
+\usepackage{titletoc}  % http://ctan.org/pkg/titletoc
+
+% Set the prefix name in outline
+\titlecontents{chapter}                           % <section-type>
+  [0pt]                                           % <left>
+  {}                                              % <above-code>
+  {\bfseries\chaptername\ \thecontentslabel\quad} % <numbered-entry-format>
+  {\bfseries}                                     % <numberless-entry-format>
+  {\bfseries\hfill\contentspage}                  % <filler-page-format>
 
 % Set watermark
 \IfFileExists{watermark.pdf}
@@ -263,6 +273,13 @@ AutoFakeSlant=.3,
 \setcounter{tocdepth}{2}
 \pagestyle{plain}
 \@setspacing
+
+\DeclareRobustCommand{\makebibliography}{
+    % Correct the bookmark of Bibliography and set up the style
+    \cleardoublepage
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\bibname}
+}
 
 % Setup doi
 \insertdoi
