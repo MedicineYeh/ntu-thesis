@@ -4,10 +4,10 @@ BIBTEX=bibtex
 NTU_WATERMARK_LINK=http://etds.lib.ntu.edu.tw/files/watermark.pdf
 CLEANABLE=*.aux *.log *.nav *.dvi *.out *.snm *.toc *.bbl *.blg *.lof *.lot *.spl *.lof *.lot
 
+ifdef PASSWORD
+all: $(MAIN).pdf $(MAIN)-with-pass.pdf
+else
 all: $(MAIN).pdf
-
-ifdef DOI
-TEXFLAG+="\def\withdoi{1} "
 endif
 
 TEXFLAG+="\input{$(MAIN)} "
@@ -20,6 +20,11 @@ $(MAIN).pdf: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
 	$(BIBTEX) $(MAIN)
 	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
 	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
+
+ifdef PASSWORD
+$(MAIN)-with-pass.pdf: $(MAIN).pdf
+	@pdftk $^ output $@ owner_pw "$(PASSWORD)" allow printing allow ScreenReaders
+endif
 
 update: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
 	$(BIBTEX) $(MAIN)
