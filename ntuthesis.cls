@@ -59,13 +59,14 @@ ItalicFont =  *-Italic,
 BoldItalicFont =  *-BoldItalic,
 ]
 % Set CJK font
-\setCJKmainfont{ukai.ttc}[
-Path = ./fonts/fonts-arphic-ukai-0.2.20080216.2/ ,
-UprightFeatures = {FontIndex=0},
-BoldFeatures = {FontIndex=1},
-ItalicFeatures = {FontIndex=2},
-BoldItalicFeatures = {FontIndex=3},
-]
+\setCJKmainfont[Path=./fonts/fonts-arphic-ukai-0.2.20080216.2/]{ukai.ttc}
+%\setCJKmainfont{ukai.ttc}[
+%Path = ./fonts/fonts-arphic-ukai-0.2.20080216.2/,
+%UprightFeatures = {FontIndex=0},
+%BoldFeatures = {FontIndex=1},
+%ItalicFeatures = {FontIndex=2},
+%BoldItalicFeatures = {FontIndex=3},
+%]
 
 % Using the tex-text mapping for ligatures etc.
 \defaultfontfeatures{Mapping=tex-text}
