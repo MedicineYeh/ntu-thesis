@@ -50,14 +50,21 @@
     \setlength{\wpYoffset}{10.5225cm}
 }
 
-%\fontspec{ukai.ttc}[Path=./fonts/]
-\setmainfont{Liberation Serif}
+% Set English font
+\setmainfont{LiberationSerif}[
+Path = ./fonts/liberation-serif/,
+UprightFont = *-Regular,
+BoldFont = *-Bold,
+ItalicFont =  *-Italic,
+BoldItalicFont =  *-BoldItalic,
+]
+% Set CJK font
 \setCJKmainfont{ukai.ttc}[
 Path = ./fonts/fonts-arphic-ukai-0.2.20080216.2/ ,
-UprightFeatures = {FontIndex=0} ,
-BoldFeatures = {FontIndex=1} ,
-ItalicFeatures = {FontIndex=2} ,
-BoldItalicFeatures = {FontIndex=3} ,
+UprightFeatures = {FontIndex=0},
+BoldFeatures = {FontIndex=1},
+ItalicFeatures = {FontIndex=2},
+BoldItalicFeatures = {FontIndex=3},
 ]
 
 % Using the tex-text mapping for ligatures etc.
