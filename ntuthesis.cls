@@ -42,14 +42,6 @@
 \usepackage{wallpaper}
 \usepackage{verbatim}
 
-% Custom commands
-\DeclareRobustCommand{\setMainFont}[1]{
-    \@ifundefined{IfFontExistsTF}{}{\IfFontExistsTF{#1}{\setmainfont{#1}}}
-}
-\DeclareRobustCommand{\setChineseFont}[1]{
-    \@ifundefined{IfFontExistsTF}{}{\IfFontExistsTF{#1}{\setCJKmainfont{#1}}}
-}
-
 % Set watermark
 \IfFileExists{watermark.pdf}
 {
@@ -58,9 +50,16 @@
     \setlength{\wpYoffset}{10.5225cm}
 }
 
-% Try to set fonts
-\setMainFont{Times New Roman}
-\setChineseFont{標楷體}
+%\fontspec{ukai.ttc}[Path=./fonts/]
+\setmainfont{Liberation Serif}
+\setCJKmainfont{ukai.ttc}[
+Path = ./fonts/fonts-arphic-ukai-0.2.20080216.2/ ,
+UprightFeatures = {FontIndex=0} ,
+BoldFeatures = {FontIndex=1} ,
+ItalicFeatures = {FontIndex=2} ,
+BoldItalicFeatures = {FontIndex=3} ,
+]
+
 % Using the tex-text mapping for ligatures etc.
 \defaultfontfeatures{Mapping=tex-text}
 
