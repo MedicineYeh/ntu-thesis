@@ -21,7 +21,7 @@ TEXFLAG+="\input{$(MAIN)} "
 watermark.pdf:
 	wget $(NTU_WATERMARK_LINK) -O watermark.pdf
 
-$(MAIN).pdf: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf certification.pdf
+$(MAIN).pdf: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
 	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
 	$(BIBTEX) $(MAIN)
 	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
