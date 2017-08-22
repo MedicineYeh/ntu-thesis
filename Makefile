@@ -10,16 +10,17 @@ else
 all: $(MAIN).pdf
 endif
 
-TEXFLAG+="\input{$(MAIN)} "
+TEXFLAG+=-halt-on-error
+TEXFLAG+=-shell-escape
 
 watermark.pdf:
 	wget $(NTU_WATERMARK_LINK) -O watermark.pdf
 
 $(MAIN).pdf: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
-	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
+	$(LATEX) $(TEXFLAG) $(MAIN).tex
 	$(BIBTEX) $(MAIN)
-	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
-	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
+	$(LATEX) $(TEXFLAG) $(MAIN).tex
+	$(LATEX) $(TEXFLAG) $(MAIN).tex
 
 ifdef PASSWORD
 $(MAIN)-with-pass.pdf: $(MAIN).pdf
@@ -27,7 +28,7 @@ $(MAIN)-with-pass.pdf: $(MAIN).pdf
 endif
 
 update: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
-	$(LATEX) -shell-escape $(TEXFLAG) $(MAIN) < /dev/null
+	$(LATEX) $(TEXFLAG) $(MAIN).tex
 	$(BIBTEX) $(MAIN)
 
 clean:
