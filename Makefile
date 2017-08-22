@@ -32,6 +32,6 @@ update: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
 	$(BIBTEX) $(MAIN)
 
 clean:
-	rm -f $(CLEANABLE) $(MAIN).pdf
+	rm -f $(CLEANABLE) $(MAIN).pdf $(MAIN)-with-pass.pdf
 	rm -rf _minted-*
 
