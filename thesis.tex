@@ -1,4 +1,4 @@
-\documentclass{ntuthesis}
+\documentclass[master]{ntuthesis}
 
 \usepackage{fancyhdr}              % Extensive control of page headers and footers
 \usepackage[normalem]{ulem}        % Package for underlining
@@ -67,17 +67,22 @@
 
 \frontmatter
 
+%-----------                cover page                -----------
+%\removedoi       % Uncomment this if you don't want doi on the cover page
+%\ClearWallPaper  % Uncomment this if you don't want watermark on the cover page
 \makecover
-
+%----------- side page, used for printing on spline   -----------
+\makespine
+%----------- generate/include the certification page  -----------
+\setcounter{page}{1} % Reset page number
 \IfFileExists{certification.pdf}
 {
+    \addcontentsline{toc}{chapter}{口試委員會審定書}
     \includepdf{certification.pdf}
 }
 {
     \makecertification
 }
-
-\setcounter{page}{1} % Reset page number
 
 \input{chapters/acknowledgements}
 \input{chapters/abstract}

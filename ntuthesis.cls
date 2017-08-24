@@ -17,6 +17,7 @@
 \DeclareRobustCommand{\@typezh}{碩士}
 \DeclareRobustCommand{\@classen}{Thesis}
 \DeclareRobustCommand{\@classzh}{論文}
+\DeclareOption{master}{\gdef\@typeen{Master}\gdef\@typezh{碩士}\gdef\@classen{Thesis}}
 \DeclareOption{phd}{\gdef\@typeen{Doctoral}\gdef\@typezh{博士}\gdef\@classen{Dissertation}}
 \DeclareOption{proposal}{\gdef\@typeen{Proposal for Doctoral}\gdef\@typezh{博士論文計畫提案書}\gdef\@classen{Dissertation}\gdef\@classzh{}}
 \DeclareRobustCommand{\@setspacing}{\doublespacing}
@@ -71,17 +72,7 @@
     AutoFakeSlant=.3,
     ]
     {ukai.ttc}
-    %\setCJKmainfont{ukai.ttc}[
-    %Path = ./fonts/fonts-arphic-ukai-0.2.20080216.2/,
-    %UprightFeatures = {FontIndex=0},
-    %BoldFeatures = {FontIndex=1},
-    %ItalicFeatures = {FontIndex=2},
-    %BoldItalicFeatures = {FontIndex=3},
-    %AutoFakeBold=3,
-    %AutoFakeSlant=.3,
-    %]
-
-    % Using the tex-text mapping for ligatures etc.
+    % Use the tex-text mapping for ligatures etc.
     \defaultfontfeatures{Mapping=tex-text}
 \else
     \typeout{ *** LaTeX *** ^^J}
@@ -95,12 +86,15 @@
   {\bfseries}                                     % <numberless-entry-format>
   {\bfseries\hfill\contentspage}                  % <filler-page-format>
 
-% Set watermark
-\IfFileExists{watermark.pdf}
-{
-    \CenterWallPaper{0.174}{watermark.pdf}
-    \setlength{\wpXoffset}{6.1725cm}
-    \setlength{\wpYoffset}{10.5225cm}
+% Command to set watermark
+\IfFileExists{watermark.pdf}{
+    \DeclareRobustCommand{\enablewatermark}{
+        \CenterWallPaper{0.174}{watermark.pdf}
+        \setlength{\wpXoffset}{6.1725cm}
+        \setlength{\wpYoffset}{10.5225cm}
+    }
+}{
+    \DeclareRobustCommand{\enablewatermark}{}
 }
 
 
@@ -173,6 +167,8 @@
   }
 }
 
+\DeclareRobustCommand\removedoi{\backgroundsetup{contents={}}}
+
 %  stolen from CJKfntef
 %
 %  myCJKfilltwosides environment:
@@ -222,22 +218,46 @@
 
   \global\let\CJKsymbol \myCJK@filltwosidesSymbol
   \global\myCJK@fillbegin@false
-  \global\myCJK@filltwosides@false}
+  \global\myCJK@filltwosides@false
+}
+\def\CJKmovesymbol#1{\raise.35em\hbox{#1}}
+\def\CJKmove{\let\CJKsymbol\CJKmovesymbol
+\let\CJKpunctsymbol\CJKsymbol}
 
-
-\DeclareRobustCommand{\CJKmove}[1]{\raisebox{.35em}{#1}}
 \DeclareRobustCommand{\makespine}{
+  \removedoi
+  \thispagestyle{empty}
+  \ClearWallPaper
+
+\ifxetex
   \noindent\rotatebox{-90}{
-    \CJKfamily{sidepagefont}
+    %\CJKfamily{spinepagefontzh}
+    \addCJKfontfeatures{RawFeature={vertical}}
     \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
-      \fontsize{8}{6}\selectfont
-      \begin{myCJKfilltwosides}{3cm}\CJKmove{\@universityzh}\end{myCJKfilltwosides}\newline
+      \fontsize{8}{2}\selectfont
+      \begin{myCJKfilltwosides}{3cm}\CJKmove{\@universityzh}\end{myCJKfilltwosides} \hfill\newline
       \begin{myCJKfilltwosides}{3cm}\CJKmove{\@institutezh}\end{myCJKfilltwosides} & &
       \CJKmove{\@typezh\@classzh} & &
       {\fontsize{14}{14}\selectfont\CJKmove{\@titlezh}} & &
-      {\fontsize{14}{14}\selectfont\CJKmove{\@authorzh{} 撰}} & &
-      \raisebox{-0.25em}{\rotatebox{90}{\@yearzh{}} \rotatebox{90}{\hspace{0.25em}\@monthzh{}}}
+      {\fontsize{14}{14}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
+      {\rotatebox{90}{\hspace{-0.25em}\@yearzh{}} \rotatebox{90}{\hspace{0.25em}\@monthzh{}}}
     \end{tabular}}
+\else
+  \noindent\rotatebox{-90}{
+    \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
+      \fontsize{8}{2}\selectfont
+      \begin{myCJKfilltwosides}{3cm}\CJKmove{\@universityen}\end{myCJKfilltwosides}
+      \CJKmove{\@instituteen} & &
+      \CJKmove{\@typeen\@classen} & &
+      {\fontsize{14}{14}\selectfont\CJKmove{\@titleen}} & &
+      {\fontsize{14}{14}\selectfont\CJKmove{\@authoren{}}} & &
+      {\rotatebox{90}{\hspace{-1.8em}\@yearen{}} \rotatebox{90}{\hspace{-1.8em}\@monthen{}}}
+    \end{tabular}}
+\fi
+
+    \clearpage
+    \insertdoi
+    \enablewatermark
 }
 
 \DeclareRobustCommand{\makecertification}{
@@ -304,4 +324,6 @@
 
 % Setup doi
 \insertdoi
+% Setup watermark
+\enablewatermark
 
