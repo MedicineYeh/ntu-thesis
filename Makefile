@@ -40,6 +40,9 @@ fast: $(DEPENDENCIES)
 	pdflatex $(TEXFLAG) $(MAIN).tex
 	$(BIBTEX) $(MAIN)
 
+html: $(MAIN).pdf
+	latex2html $(MAIN).tex -mkdir -dir html_output
+
 clean:
 	rm -f $(CLEANABLE) $(MAIN).pdf $(MAIN)-with-pass.pdf
 	rm -rf _minted-*

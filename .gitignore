@@ -4,6 +4,8 @@ main.pdf
 watermark.pdf
 thesis.pdf
 
+html_output
+
 # Created by https://www.gitignore.io
 .DS_Store
 *.swp
