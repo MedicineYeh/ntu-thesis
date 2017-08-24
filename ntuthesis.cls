@@ -27,14 +27,10 @@
 \LoadClass[a4paper,openany,12pt]{book}
 
 % Required packages
-\RequirePackage[top=2cm,left=3cm,bottom=3cm,right=3cm]{geometry}
-\RequirePackage{xeCJK}
-\RequirePackage{setspace}
-\RequirePackage[contents={}]{background}
-
-% Use packages
-\usepackage{etoolbox}
-\usepackage{fontspec}
+\usepackage[top=2cm,left=3cm,bottom=3cm,right=3cm]{geometry}
+\usepackage{ifpdf,ifxetex,ifluatex}
+\usepackage{setspace}
+\usepackage[contents={}]{background}
 \usepackage{indentfirst}
 \usepackage{amssymb}
 \usepackage{amsmath}
@@ -43,6 +39,52 @@
 \usepackage{verbatim}
 \usepackage{lipsum}    % http://ctan.org/pkg/lipsum
 \usepackage{titletoc}  % http://ctan.org/pkg/titletoc
+
+\ifpdf
+    \typeout{^^J *** PDF mode *** }
+\else
+    \typeout{^^J *** DVI mode ***}
+\fi
+\ifluatex
+    % LuaLaTeX specific code
+    \typeout{ *** LuaLaTeX *** ^^J}
+\else\ifxetex
+    % XeLaTeX specific code
+    \typeout{ *** XeLaTeX *** ^^J}
+    \usepackage{xeCJK}
+    \usepackage{etoolbox}
+    \usepackage{fontspec}
+
+    % Set English font
+    \setmainfont{LiberationSerif}[
+    Path = ./fonts/liberation-serif/,
+    UprightFont = *-Regular,
+    BoldFont = *-Bold,
+    ItalicFont =  *-Italic,
+    BoldItalicFont =  *-BoldItalic,
+    ]
+    % Set CJK font
+    \setCJKmainfont[
+    Path=./fonts/fonts-arphic-ukai-0.2.20080216.2/,
+    AutoFakeBold=3,
+    AutoFakeSlant=.3,
+    ]
+    {ukai.ttc}
+    %\setCJKmainfont{ukai.ttc}[
+    %Path = ./fonts/fonts-arphic-ukai-0.2.20080216.2/,
+    %UprightFeatures = {FontIndex=0},
+    %BoldFeatures = {FontIndex=1},
+    %ItalicFeatures = {FontIndex=2},
+    %BoldItalicFeatures = {FontIndex=3},
+    %AutoFakeBold=3,
+    %AutoFakeSlant=.3,
+    %]
+
+    % Using the tex-text mapping for ligatures etc.
+    \defaultfontfeatures{Mapping=tex-text}
+\else
+    \typeout{ *** LaTeX *** ^^J}
+\fi\fi
 
 % Set the prefix name in outline
 \titlecontents{chapter}                           % <section-type>
@@ -60,33 +102,6 @@
     \setlength{\wpYoffset}{10.5225cm}
 }
 
-% Set English font
-\setmainfont{LiberationSerif}[
-Path = ./fonts/liberation-serif/,
-UprightFont = *-Regular,
-BoldFont = *-Bold,
-ItalicFont =  *-Italic,
-BoldItalicFont =  *-BoldItalic,
-]
-% Set CJK font
-\setCJKmainfont[
-Path=./fonts/fonts-arphic-ukai-0.2.20080216.2/,
-AutoFakeBold=3,
-AutoFakeSlant=.3,
-]
-{ukai.ttc}
-%\setCJKmainfont{ukai.ttc}[
-%Path = ./fonts/fonts-arphic-ukai-0.2.20080216.2/,
-%UprightFeatures = {FontIndex=0},
-%BoldFeatures = {FontIndex=1},
-%ItalicFeatures = {FontIndex=2},
-%BoldItalicFeatures = {FontIndex=3},
-%AutoFakeBold=3,
-%AutoFakeSlant=.3,
-%]
-
-% Using the tex-text mapping for ligatures etc.
-\defaultfontfeatures{Mapping=tex-text}
 
 % Declarations
 \DeclareRobustCommand{\university}[2]{\gdef\@universityen{#1}\gdef\@universityzh{#2}}

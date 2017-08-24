@@ -17,7 +17,7 @@ watermark.pdf:
 	wget $(NTU_WATERMARK_LINK) -O watermark.pdf
 
 $(MAIN).pdf: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
-	$(LATEX) $(TEXFLAG) $(MAIN).tex
+	pdflatex $(TEXFLAG) $(MAIN).tex
 	$(BIBTEX) $(MAIN)
 	$(LATEX) $(TEXFLAG) $(MAIN).tex
 	$(LATEX) $(TEXFLAG) $(MAIN).tex
@@ -29,6 +29,10 @@ endif
 
 update: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
 	$(LATEX) $(TEXFLAG) $(MAIN).tex
+	$(BIBTEX) $(MAIN)
+
+fast: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
+	pdflatex $(TEXFLAG) $(MAIN).tex
 	$(BIBTEX) $(MAIN)
 
 clean:
