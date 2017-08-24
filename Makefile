@@ -3,6 +3,11 @@ LATEX=xelatex
 BIBTEX=bibtex
 NTU_WATERMARK_LINK=http://etds.lib.ntu.edu.tw/files/watermark.pdf
 CLEANABLE=*.aux *.log *.nav *.dvi *.out *.snm *.toc *.bbl *.blg *.lof *.lot *.spl *.lof *.lot
+DEPENDENCIES=chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
+
+ifneq ("$(wildcard ./certification.pdf)","")
+DEPENDENCIES+=certification.pdf
+endif
 
 ifdef PASSWORD
 all: $(MAIN).pdf $(MAIN)-with-pass.pdf
@@ -16,7 +21,7 @@ TEXFLAG+=-shell-escape
 watermark.pdf:
 	wget $(NTU_WATERMARK_LINK) -O watermark.pdf
 
-$(MAIN).pdf: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
+$(MAIN).pdf: $(DEPENDENCIES)
 	pdflatex $(TEXFLAG) $(MAIN).tex
 	$(BIBTEX) $(MAIN)
 	$(LATEX) $(TEXFLAG) $(MAIN).tex
@@ -27,11 +32,11 @@ $(MAIN)-with-pass.pdf: $(MAIN).pdf
 	@pdftk $^ output $@ owner_pw "$(PASSWORD)" allow printing allow ScreenReaders
 endif
 
-update: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
+update: $(DEPENDENCIES)
 	$(LATEX) $(TEXFLAG) $(MAIN).tex
 	$(BIBTEX) $(MAIN)
 
-fast: chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
+fast: $(DEPENDENCIES)
 	pdflatex $(TEXFLAG) $(MAIN).tex
 	$(BIBTEX) $(MAIN)
 
