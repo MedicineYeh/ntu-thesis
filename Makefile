@@ -45,5 +45,5 @@ html: $(MAIN).pdf
 
 clean:
 	rm -f $(CLEANABLE) $(MAIN).pdf $(MAIN)-with-pass.pdf
-	rm -rf _minted-*
+	rm -rf _minted-* html_output
 
