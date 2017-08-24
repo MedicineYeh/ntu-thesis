@@ -42,6 +42,7 @@
 
 \ifpdf
     \typeout{^^J *** PDF mode *** }
+    \GenericWarning{(cont.)\space\space}{Please use XeLaTeX on your machine}
 \else
     \typeout{^^J *** DVI mode ***}
 \fi
@@ -124,6 +125,11 @@
 
 \DeclareRobustCommand{\makecover}{
   \begin{titlepage}
+    \ifpdf
+      \textbf{Please use XeLaTeX on your machine (e.g. overleaf).}\\
+      \textbf{pdflatex is used only for speed.}\\
+      \textbf{You can use pdflatex as a draft to check your English and format your documents.}
+    \fi
     \vspace{1cm}
     \begin{singlespace}
     \begin{center}
