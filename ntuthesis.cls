@@ -242,8 +242,8 @@
       \CJKmove{\@typezh\@classzh} & &
       {\fontsize{14}{14}\selectfont\CJKmove{\@titlezh}} & &
       {\fontsize{14}{14}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
-      {\rotatebox[origin=m]{90}{\centering\@yearzh{}}
-       \rotatebox[origin=m]{90}{\centering\@monthzh{}}}
+      {\rotatebox[origin=c]{90}{\centering\hspace{0.1em}\@yearzh{}}
+       \rotatebox[origin=c]{90}{\centering\hspace{0.1em}\@monthzh{}}}
     \end{tabular}}
   \hspace{5cm}
   \noindent\rotatebox{-90}{
@@ -251,7 +251,7 @@
     \addCJKfontfeatures{RawFeature={vertical}}
     \centering
     \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
-      \vspace{-0.45em}
+      \vspace{-0.55em}
       \fontsize{6}{4}\selectfont
       \begin{CJKfilltwosides}{2.5cm}\CJKmove{\@universityzh} \\
       \CJKmove{\@institutezh}\end{CJKfilltwosides} & &
