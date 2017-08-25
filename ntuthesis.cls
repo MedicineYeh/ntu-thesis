@@ -233,15 +233,53 @@
   \noindent\rotatebox{-90}{
     %\CJKfamily{spinepagefontzh}
     \addCJKfontfeatures{RawFeature={vertical}}
+    \centering
     \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
-      \vspace{-0.6em}
+      \vspace{-0.45em}
       \fontsize{10}{8}\selectfont
       \begin{CJKfilltwosides}{3cm}\CJKmove{\@universityzh} \\
       \CJKmove{\@institutezh}\end{CJKfilltwosides} & &
       \CJKmove{\@typezh\@classzh} & &
       {\fontsize{14}{14}\selectfont\CJKmove{\@titlezh}} & &
       {\fontsize{14}{14}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
-      {\rotatebox{90}{\hspace{-0.25em}\@yearzh{}} \rotatebox{90}{\hspace{0.25em}\@monthzh{}}}
+      {\rotatebox[origin=m]{90}{\centering\@yearzh{}}
+       \rotatebox[origin=m]{90}{\centering\@monthzh{}}}
+    \end{tabular}}
+  \hspace{5cm}
+  \noindent\rotatebox{-90}{
+    %\CJKfamily{spinepagefontzh}
+    \addCJKfontfeatures{RawFeature={vertical}}
+    \centering
+    \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
+      \vspace{-0.45em}
+      \fontsize{6}{4}\selectfont
+      \begin{CJKfilltwosides}{2.5cm}\CJKmove{\@universityzh} \\
+      \CJKmove{\@institutezh}\end{CJKfilltwosides} & &
+      \CJKmove{\fontsize{10}{10}\selectfont\@typezh\@classzh} & &
+      {\fontsize{10}{10}\selectfont\CJKmove{\@titlezh}} & &
+      {\fontsize{10}{10}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
+      {\fontsize{10}{10}\selectfont
+       \rotatebox[origin=m]{90}{\centering\@yearzh{}}
+       \rotatebox[origin=m]{90}{\centering\@monthzh{}}
+      }
+    \end{tabular}}
+  \hspace{5cm}
+  \noindent\rotatebox{-90}{
+    %\CJKfamily{spinepagefontzh}
+    \addCJKfontfeatures{RawFeature={vertical}}
+    \centering
+    \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
+      \vspace{-0.45em}
+      \fontsize{6}{4}\selectfont
+      \begin{CJKfilltwosides}{2.5cm}\CJKmove{\@universityzh} \\
+      \CJKmove{\@institutezh}\end{CJKfilltwosides} & &
+      \CJKmove{\fontsize{8}{8}\selectfont\@typezh\@classzh} & &
+      {\fontsize{8}{8}\selectfont\CJKmove{\@titlezh}} & &
+      {\fontsize{8}{8}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
+      {\fontsize{8}{8}\selectfont
+       \rotatebox[origin=m]{90}{\centering\@yearzh{}}
+       \rotatebox[origin=m]{90}{\centering\@monthzh{}}
+      }
     \end{tabular}}
 \else
   \noindent\rotatebox{-90}{
