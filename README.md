@@ -1,17 +1,12 @@
-# 臺灣大學碩博士論文 XeLaTeX 模版 2017 最新版
-==========
+臺灣大學碩博士論文 XeLaTeX 模版 2017 最新版
 
 # 前言
-----------
-
-# 這個模版的前身是 [tzhuan/ntu-thesis](https://github.com/tzhuan/ntu-thesis/wiki)，經過修正和整理成新的板型。
+這個模版的前身是 [tzhuan/ntu-thesis](https://github.com/tzhuan/ntu-thesis/wiki)，經過修正和整理成新的板型。
 
 # 說明
-----------
 請參考 [wiki](https://github.com/tzhuan/ntu-thesis/wiki) 的說明。
 
 # Make Options
-----------
 * `make fast`
     使用__pdflatex__編譯一次，快速的編譯出結果查看排版，但是不支援中文
 * `make update`
@@ -22,11 +17,9 @@
     產生出另外一個加密過的pdf檔案（上傳論文時需要做的步驟）
 
 # Suggestions
-----------
-1. If `minted` is not used in your thesis, comment out that package for improving the speed.
+* If `minted` is not used in your thesis, comment out that package for improving the speed.
 
 # Changelog
-----------
   * v0.8
     * Add font support and fix Table Of Contents
     * Add many package supports
