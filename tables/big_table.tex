@@ -1,0 +1,27 @@
+% The "*" will make this table across two columns if the template is in two-column mode
+\begin{table*}[tbh!]
+\centering
+\resizebox{\columnwidth}{!}{%
+\begin{tabular}{|K{2cm}|K{2.5cm}|K{1.5cm}|K{1.5cm}|K{1.5cm}|K{1.5cm}|K{1.5cm}|K{1.5cm}|}
+\hline
+Metrics & Data          &   CPU  & \multicolumn{3}{c|}{Cache} & Memory & Branch    \\ \cline{4-6}
+        & Structure     &         & L1I     & L1D     & L2D   &        &           \\ \hline
+\multirow{2}{*}{\begin{minipage}{2cm}\centering Miss Rate\end{minipage}}
+        & Ordered Map   & -       & 0.000   & 0.019   & 0.247 & -      & 0.100     \\
+        & Unordered Map & -       & 0.000   & 0.036   & 0.305 & -      & 0.089     \\ \hline
+
+\multirow{2}{*}{\begin{minipage}{2cm}\centering Access Times\end{minipage}}
+        & Ordered Map   & 863.04M & 231.36M & 491.50M & 9.92M & 2.45M  & 194.30M   \\
+        & Unordered Map & 310.33M & 70.57M  & 81.46M  & 3.38M & 1.03M  & 44.34M    \\ \hline
+
+\multirow{2}{*}{\begin{minipage}{2cm}\centering Estimated Time(s)\end{minipage}}
+        & Ordered Map   & 0.174s  & \multicolumn{3}{c|}{0.790s} & 0.270s  & 0.325s \\
+        & Unordered Map & 0.126s  & \multicolumn{3}{c|}{0.230s} & 0.190s  & 0.066s \\ \hline
+
+\end{tabular}
+}
+\caption[Performance breakdown of data structures]
+{Performance-counter comparison and breakdown of the Program ID 16 (A Map) and Program ID 20 (B Map)}
+\label{table:big_table}
+\end{table*}
+

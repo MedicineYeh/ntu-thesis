@@ -1,47 +1,39 @@
 \chapter{Introduction}
-\label{c:intro}
+\label{chap:intro}
 
-Attention plays an important role in human vision. For example, when
-we look at an image, our eye movements comprise a succession of {\em
-fixations} (repetitive positioning of eyes to parts of the image)
-and {\em saccades} (rapid eye jump). Those parts of the image that
-cause eye fixations and capture primary attention are called {\em
-regions of interest} (ROIs). Studies in visual attention and eye
-movement have shown that humans generally only attend to a few ROIs.
-Detecting these visually attentive regions in images is challenging
-but useful in many multimedia applications, such as automatic
-thumbnail cropping, object recognition, content-based image
-retrieval, adaptive image compression and automatic browsing in
-small-screen devices.
+One can find papers with its bib on \emph{Google Scholar}.
+Citation is simple~\cite{yeh2016flattened,intel_ocl_spm}, but remember that space after comma is not allowed.
 
-Many algorithms have been proposed for automatic ROI detection in
-images. Unfortunately, these methods were often evaluated only on
-specific and small data sets that are not publicly available. The
-lack of published {\em benchmarks} makes experiments non-repeatable
-and quantitative evaluation difficult. However, as recommended by
-the latest ACM SIGMM retreat, repeatable experiments using published
-benchmarks are important for advancing the multimedia research
-field~\cite{Rowe:2005:ASR,intel_ocl_spm}, Figure~\ref{kl}.
+Please draw figures by yourself as possible and export to pdf format, which contains words and vector graphics.
+Two methods can be used to reference a figure, ex: reference the number Figure~\ref{fig:simple_figure}.
+Remember the "\textasciitilde" is required to force an empty space before the referenced number.
+The other way is using auto reference which generates the text for you as well, \autoref{fig:simple_figure}
+If you apply auto reference on table, the text will be set to~\autoref{table:simple_table} and~\autoref{table:big_table}.
 
-\begin{figure}
+\begin{figure}[tbh!]
 \centering
-\includegraphics[width=0.45\textwidth]{figures/kl}
-\caption[KL short caption]{kl-distance long caption}
-\label{kl}
+\includegraphics[width=0.95\columnwidth]{figures/flowchart}
+\caption{Flow chart of something}
+\label{fig:simple_figure}
 \end{figure}
 
-\begin{table}[t]
-\begin{center}
-\begin{tabular}{lcc}
+Tables are usually too long, we suggest to put all tables in external files.
 
-\hline
-                    &  {\small Itti's method}     & {\small Fuzzy growing}    \\
-\hline
-{\small Precision}           &  0.4475    & 0.4506 \\
-{\small Recall}              &  0.5515    & 0.5542 \\
-\hline
+\input{tables/simple_table}
 
-\end{tabular}
-\caption[Evaluation of FOA sets]{\small Evaluation of FOA sets. } \label{t:FOA}
-\end{center}
-\end{table}
+\input{tables/big_table}
+
+Codes can be written/colored in two ways.
+Listing~\autoref{fig:code_wordcount} and Minted~\autoref{fig:code_wordcount_minted}.
+Usually, \emph{listing} is more prefered because the results from \emph{minted} is \textbf{too fancy}.
+In addition, \emph{minted} takes more time to prcess and generates \emph{\_minted-*} directory.
+
+\input{codes/map-code}
+
+Algorithm in pseudo code can be written as demoed in \autoref{alg:simple_algorithm}.
+
+\input{codes/algorithm-demo}
+
+HTML output can be done by \emph{make html} command.
+One can use this to generate text, i.e. list of figures and bibliography, for copying to website when submitting thesis.
+

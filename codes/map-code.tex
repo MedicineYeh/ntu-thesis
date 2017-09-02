@@ -1,0 +1,30 @@
+\begin{figure}[tbh!]
+\begin{lstlisting}{c++}
+void create_map(auto &str_map, auto &str_vector) {
+    // Iterate through str_vector
+    for (auto &&v : str_vector) {
+        // Accumulate
+        str_map[v] += 1;
+    }
+}
+\end{lstlisting}
+\caption[Code of Wordcount with Listing]
+{Code for spliting spaces and building a word count map in C++14.}
+\label{fig:code_wordcount}
+\end{figure}
+
+\begin{figure}[tbh!]
+\begin{minted}{c++}
+void create_map(auto &str_map, auto &str_vector) {
+    // Iterate through str_vector
+    for (auto &&v : str_vector) {
+        // Accumulate
+        str_map[v] += 1;
+    }
+}
+\end{minted}
+\caption[Code of Wordcount with Minted]
+{Code for spliting spaces and building a word count map in C++14.}
+\label{fig:code_wordcount_minted}
+\end{figure}
+
