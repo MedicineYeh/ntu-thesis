@@ -1,6 +1,6 @@
 % author: Medicine Yeh
 % origin: Tz-Huan Huang [http://www.csie.ntu.edu.tw/~tzhuan]
-% version: 0.6
+% version: 0.8
 
 % ----------------------------------------------------------------------------
 % "THE CHOCOLATE-WARE LICENSE":
@@ -11,6 +11,8 @@
 
 \NeedsTeXFormat{LaTeX2e}
 \ProvidesClass{ntuthesis}[2017/09/01 Thesis template for National Taiwan University]
+\def\fileversion{v0.8}
+\def\filedate{Sep 1, 2017}
 
 % Derived from book class
 \DeclareRobustCommand{\@typeen}{Master}
