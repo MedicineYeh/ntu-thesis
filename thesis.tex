@@ -34,7 +34,7 @@
 
 % These are all for programing languages
 \usepackage{algorithm, algorithmicx, algpseudocode} % Pseudo Code
-\usepackage{minted}     % Using external tools to render codes
+\usepackage{minted}     % Using external tools for rendering codes
 \usepackage{listings}   % listing is an alternative solution for colored codes
 \usepackage{color}      % color macros
 
@@ -63,50 +63,47 @@
 % Your information goes here
 \input{ntuvars}
 
+% Useful command samples provided by this template
+%\removedoi        % Remove doi after this page (included)
+%\removewatermark  % Remove watermark after this page (included)
+
 \begin{document}
 
 \frontmatter
-
-%-----------                cover page                -----------
-%\removedoi       % Uncomment this if you don't want doi on the cover page
-%\ClearWallPaper  % Uncomment this if you don't want watermark on the cover page
-\makecover
-%----------- side page, used for printing on spline   -----------
-\makespine
-%----------- generate/include the certification page  -----------
-\setcounter{page}{1} % Reset page number
-\IfFileExists{certification.pdf}
-{
-    \addcontentsline{toc}{chapter}{口試委員會審定書}
-    \includepdf{certification.pdf}
-}
-{
-    \makecertification
-}
-
-\input{chapters/acknowledgements}
-\input{chapters/abstract}
-
-\tableofcontents
-\listoffigures
-\listoftables
+    %-----------          disable numbering system        -----------
+    \pagenumbering{gobble}
+    %-----------                make covers               -----------
+    \makecover
+    \makespine
+    %-----------              make title page             -----------
+    \insertdoi             % Insert doi after this page (included)
+    \insertwatermark       % Insert watermark after this page (included)
+    \maketitlepage
+    %-----------           reset numbering system         -----------
+    \pagenumbering{roman}  % Reset number format
+    \setcounter{page}{1}   % Reset page number
+    %----------- generate/include the certification page  -----------
+    \makecertification[angle=0]{certification.pdf}  % angle=180 for up-side-down image
+    \input{chapters/acknowledgements}
+    \input{chapters/abstract}
+    %-----------        Generate lists and indices        -----------
+    \tableofcontents
+    \listoffigures
+    \listoftables
 
 \mainmatter
-
-% Your thesis goes here
-\input{chapters/chap1-introduction}
-%\input{chapters/chap2-relatedworks}
-%\input{chapters/chap3-implementations}
-%\input{chapters/chap4-evaluations}
-%\input{chapters/chap5-conclusion}
-
-\appendix
+    % Your thesis goes here
+    \input{chapters/chap1-introduction}
+    \input{chapters/chap2-relatedworks}
+    \input{chapters/chap3-implementations}
+    \input{chapters/chap4-evaluations}
+    \input{chapters/chap5-conclusion}
+    \appendix
 
 \backmatter
-
-\makebibliography
-\bibliographystyle{abbrv}
-% Your bibliography goes here
-\bibliography{thesis}
+    \makebibliography
+    \bibliographystyle{abbrv}
+    % Your bibliography goes here
+    \bibliography{thesis}
 
 \end{document}

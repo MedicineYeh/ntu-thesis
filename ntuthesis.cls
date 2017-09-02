@@ -44,6 +44,7 @@
 \ifpdf
     \typeout{^^J *** PDF mode *** }
     \GenericWarning{(cont.)\space\space}{Please use XeLaTeX on your machine}
+    \usepackage{newtxtext} % Use the font similar to Times New Romann
 \else
     \typeout{^^J *** DVI mode ***}
 \fi
@@ -78,7 +79,7 @@
     \typeout{ *** LaTeX *** ^^J}
 \fi\fi
 
-% Set the prefix name in outline
+% Set the prefix name in table of contents
 \titlecontents{chapter}                           % <section-type>
   [0pt]                                           % <left>
   {}                                              % <above-code>
@@ -86,16 +87,13 @@
   {\bfseries}                                     % <numberless-entry-format>
   {\bfseries\hfill\contentspage}                  % <filler-page-format>
 
-% Command to set watermark
-\IfFileExists{watermark.pdf}{
-    \DeclareRobustCommand{\enablewatermark}{
-        \CenterWallPaper{0.174}{watermark.pdf}
-        \setlength{\wpXoffset}{6.1725cm}
-        \setlength{\wpYoffset}{10.5225cm}
-    }
-}{
-    \DeclareRobustCommand{\enablewatermark}{}
-}
+% Define the name of auto reference
+\def\chapterautorefname{Chapter}
+\def\sectionautorefname{Chapter}
+\def\subsectionautorefname{Chapter}
+\def\algorithmautorefname{Algorithm}
+\def\figureautorefname{Figure}
+\def\tableautorefname{Table}
 
 
 % Declarations
@@ -118,12 +116,42 @@
 \acknowledgements{Acknowledgements}{誌謝}
 
 \DeclareRobustCommand{\makecover}{
+  \ifpdf
+    \textbf{Please use XeLaTeX on your machine (e.g. overleaf).}\\
+    \textbf{pdflatex is used only for speed.}\\
+    \textbf{You can use pdflatex as a draft to check your English and format your documents.}
+  \fi
+  \vspace{1cm}
+  \begin{singlespace}
+  \begin{center}
+    \fontsize{18}{27}\selectfont
+    \@universityzh\@collegezh\@institutezh\par
+      \@typezh{}\@classzh\par
+    {\fontsize{14}{21}\selectfont
+      \@instituteen\par
+      \@collegeen\par}
+    {\fontsize{16}{24}\selectfont
+      \@universityen\par
+      \@typeen{} \@classen\par}
+    \vspace{\fill}
+    \@titlezh\par
+    \@titleen\par
+    \vspace{\fill}
+    \@authorzh\\
+    \@authoren\par
+    \vspace{2cm}
+    指導教授：\@advisorzh\\
+    Advisor: \@advisoren\par
+    \vspace{1.5cm}
+    中華民國 \@yearzh 年 \@monthzh 月\\
+    \@monthen, \@yearen
+  \end{center}
+  \end{singlespace}
+  \vspace{1cm}
+}
+
+\DeclareRobustCommand{\maketitlepage}{
   \begin{titlepage}
-    \ifpdf
-      \textbf{Please use XeLaTeX on your machine (e.g. overleaf).}\\
-      \textbf{pdflatex is used only for speed.}\\
-      \textbf{You can use pdflatex as a draft to check your English and format your documents.}
-    \fi
     \vspace{1cm}
     \begin{singlespace}
     \begin{center}
@@ -168,6 +196,18 @@
 }
 
 \DeclareRobustCommand\removedoi{\backgroundsetup{contents={}}}
+
+\IfFileExists{watermark.pdf}{
+    \DeclareRobustCommand{\insertwatermark}{
+        \CenterWallPaper{0.174}{watermark.pdf}
+        \setlength{\wpXoffset}{6.1725cm}
+        \setlength{\wpYoffset}{10.5225cm}
+    }
+}{
+    \DeclareRobustCommand{\insertwatermark}{}
+}
+
+\DeclareRobustCommand\removewatermark{\ClearWallPaper}
 
 %  stolen from CJKfntef
 %
@@ -224,114 +264,98 @@
 \def\CJKmove{\let\CJKsymbol\CJKmovesymbol
 \let\CJKpunctsymbol\CJKsymbol}
 
-\DeclareRobustCommand{\makespine}{
-  \removedoi
-  \thispagestyle{empty}
-  \ClearWallPaper
-
-\ifxetex
+\DeclareRobustCommand{\drawspine}[3]{
   \noindent\rotatebox{-90}{
     %\CJKfamily{spinepagefontzh}
     \addCJKfontfeatures{RawFeature={vertical}}
     \centering
     \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
       \vspace{-0.45em}
-      \fontsize{10}{8}\selectfont
+      \fontsize{#1}{#2}\selectfont
       \begin{CJKfilltwosides}{3cm}\CJKmove{\@universityzh} \\
       \CJKmove{\@institutezh}\end{CJKfilltwosides} & &
-      \CJKmove{\@typezh\@classzh} & &
-      {\fontsize{14}{14}\selectfont\CJKmove{\@titlezh}} & &
-      {\fontsize{14}{14}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
-      {\rotatebox[origin=c]{90}{\centering\hspace{0.1em}\@yearzh{}}
-       \rotatebox[origin=c]{90}{\centering\hspace{0.1em}\@monthzh{}}}
-    \end{tabular}}
-  \hspace{5cm}
-  \noindent\rotatebox{-90}{
-    %\CJKfamily{spinepagefontzh}
-    \addCJKfontfeatures{RawFeature={vertical}}
-    \centering
-    \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
-      \vspace{-0.55em}
-      \fontsize{6}{4}\selectfont
-      \begin{CJKfilltwosides}{2.5cm}\CJKmove{\@universityzh} \\
-      \CJKmove{\@institutezh}\end{CJKfilltwosides} & &
-      \CJKmove{\fontsize{10}{10}\selectfont\@typezh\@classzh} & &
-      {\fontsize{10}{10}\selectfont\CJKmove{\@titlezh}} & &
-      {\fontsize{10}{10}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
-      {\fontsize{10}{10}\selectfont
+      \CJKmove{\fontsize{#3}{#3}\selectfont\@typezh\@classzh} & &
+      {\fontsize{#3}{#3}\selectfont\CJKmove{\@titlezh}} & &
+      {\fontsize{#3}{#3}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
+      {\fontsize{#3}{#3}\selectfont
        \rotatebox[origin=m]{90}{\centering\@yearzh{}}
-       \rotatebox[origin=m]{90}{\centering\@monthzh{}}
-      }
-    \end{tabular}}
-  \hspace{5cm}
-  \noindent\rotatebox{-90}{
-    %\CJKfamily{spinepagefontzh}
-    \addCJKfontfeatures{RawFeature={vertical}}
-    \centering
-    \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
-      \vspace{-0.45em}
-      \fontsize{6}{4}\selectfont
-      \begin{CJKfilltwosides}{2.5cm}\CJKmove{\@universityzh} \\
-      \CJKmove{\@institutezh}\end{CJKfilltwosides} & &
-      \CJKmove{\fontsize{8}{8}\selectfont\@typezh\@classzh} & &
-      {\fontsize{8}{8}\selectfont\CJKmove{\@titlezh}} & &
-      {\fontsize{8}{8}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
-      {\fontsize{8}{8}\selectfont
-       \rotatebox[origin=m]{90}{\centering\@yearzh{}}
-       \rotatebox[origin=m]{90}{\centering\@monthzh{}}
-      }
-    \end{tabular}}
-\else
-  \noindent\rotatebox{-90}{
-    \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
-      \fontsize{8}{2}\selectfont
-      \begin{myCJKfilltwosides}{3cm}\CJKmove{\@universityen}\end{myCJKfilltwosides}
-      \CJKmove{\@instituteen} & &
-      \CJKmove{\@typeen\@classen} & &
-      {\fontsize{14}{14}\selectfont\CJKmove{\@titleen}} & &
-      {\fontsize{14}{14}\selectfont\CJKmove{\@authoren{}}} & &
-      {\rotatebox{90}{\hspace{-1.8em}\@yearen{}} \rotatebox{90}{\hspace{-1.8em}\@monthen{}}}
-    \end{tabular}}
-\fi
-
-    \clearpage
-    \insertdoi
-    \enablewatermark
+       \rotatebox[origin=m]{90}{\centering\@monthzh{}}}
+    \end{tabular}
+  }
 }
 
-\DeclareRobustCommand{\makecertification}{
+\DeclareRobustCommand{\makespine}{
+  \thispagestyle{empty}
+  \ifxetex
+    \drawspine{10}{8}{14}
+    \hspace{5cm}
+    \drawspine{6}{4}{10}
+    \hspace{5cm}
+    \drawspine{6}{4}{8}
+  \else
+    \noindent\rotatebox{-90}{
+      \hyphenpenalty=10000
+      \begin{tabular}{m{4cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
+        \fontsize{6}{4}\selectfont
+        \CJKmove{\@universityen}
+        \CJKmove{\@instituteen} & &
+        \CJKmove{\@typeen\@classen} & &
+        {\fontsize{12}{12}\selectfont\CJKmove{\@titleen}} & &
+        {\fontsize{12}{12}\selectfont\CJKmove{\@authoren{}}} & &
+        {\fontsize{10}{10}\selectfont
+         \rotatebox[origin=m]{90}{\hspace{-0.3em}\@yearen{}}
+         \rotatebox[origin=m]{90}{\hspace{-0.3em}\@monthen{}}}
+      \end{tabular}
+    }
+  \fi
+  \if@openright\cleardoublepage\else\clearpage\fi
+}
+
+\DeclareRobustCommand{\makecertification}[2][angle=0]{
   \if@openright\cleardoublepage\else\clearpage\fi
   \thispagestyle{empty}
-  \begin{singlespace}
-  \begin{center}
-    \fontsize{24}{36}\selectfont\@universityzh\@typezh{}學位\@classzh\\
-    口試委員會審定書\par
-    \vspace{0.5cm}
-    {\fontsize{20}{30}\selectfont\@titlezh\par\@titleen\par}
-  \end{center}
+  \phantomsection
   \addcontentsline{toc}{chapter}{口試委員會審定書}
-  \vspace{1cm}
-  \fontsize{15}{24}\selectfont
-\hspace{30pt}本論文係\@authorzh{}君 (學號\@studentid)
-在\@universityzh\@institutezh{}完成之\@typezh{}學位\@classzh，%
-於民國 \@yearzh 年 \@monthzh 月 \@day 日%
-承下列考試委員審查通過及口試及格，特此證明\par
-  \end{singlespace}
-  \vspace{\fill}
-  \begin{center}
-  \begin{doublespace}
-  \fontsize{15}{30}\selectfont
-  \begin{tabular}{p{2.75cm}p{12.5cm}}
-    \raisebox{30pt}{口試委員：} & \rule{11.5cm}{1pt} \\
-    & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
-    & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
-    & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
-    & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
-    \raisebox{5pt}{所\hspace{15pt}長：} & \rule{8.5cm}{1pt}
-  \end{tabular}
-  \end{doublespace}
-  \end{center}
-  \vspace*{-1cm}
+  \IfFileExists{#2} {
+    \includepdf[#1]{#2}
+  } {
+    \begin{singlespace}
+    \begin{center}
+      \fontsize{24}{36}\selectfont\@universityzh\@typezh{}學位\@classzh\\
+      口試委員會審定書\par
+      \vspace{0.5cm}
+      {\fontsize{20}{30}\selectfont\@titlezh\par\@titleen\par}
+    \end{center}
+    \vspace{1cm}
+    \fontsize{15}{24}\selectfont
+    \hspace{30pt}本論文係\@authorzh{}君 (學號\@studentid)
+    在\@universityzh\@institutezh{}完成之\@typezh{}學位\@classzh，%
+    於民國 \@yearzh 年 \@monthzh 月 \@day 日%
+    承下列考試委員審查通過及口試及格，特此證明\par
+    \end{singlespace}
+    \vspace{\fill}
+    \begin{center}
+    \begin{doublespace}
+    \fontsize{15}{30}\selectfont
+    \begin{tabular}{p{2.75cm}p{12.5cm}}
+      \raisebox{30pt}{口試委員：} & \rule{11.5cm}{1pt} \\
+      & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
+      & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
+      & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
+      & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
+      \raisebox{5pt}{所\hspace{15pt}長：} & \rule{8.5cm}{1pt}
+    \end{tabular}
+    \end{doublespace}
+    \end{center}
+    \vspace*{-1cm}
+  }
+}
+
+\DeclareRobustCommand{\makebibliography}{
+    % Correct the bookmark of Bibliography and set up the style
+    \if@openright\cleardoublepage\else\clearpage\fi
+    \phantomsection
+    \addcontentsline{toc}{chapter}{\bibname}
 }
 
 \newenvironment{quotationpage}[1]
@@ -353,16 +377,4 @@
 \setcounter{tocdepth}{2}
 \pagestyle{plain}
 \@setspacing
-
-\DeclareRobustCommand{\makebibliography}{
-    % Correct the bookmark of Bibliography and set up the style
-    \cleardoublepage
-    \phantomsection
-    \addcontentsline{toc}{chapter}{\bibname}
-}
-
-% Setup doi
-\insertdoi
-% Setup watermark
-\enablewatermark
 
