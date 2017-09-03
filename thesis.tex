@@ -69,15 +69,10 @@
 
 \begin{document}
 
+\insertdoi         % Insert doi after this page (included)
+\insertwatermark   % Insert watermark after this page (included)
+
 \frontmatter
-    %-----------          disable numbering system        -----------
-    \pagenumbering{gobble}
-    %-----------                make covers               -----------
-    \makecover
-    \makespine
-    %-----------              make title page             -----------
-    \insertdoi             % Insert doi after this page (included)
-    \insertwatermark       % Insert watermark after this page (included)
     \maketitlepage
     %-----------           reset numbering system         -----------
     \pagenumbering{roman}  % Reset number format

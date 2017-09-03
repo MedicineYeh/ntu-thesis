@@ -25,12 +25,14 @@
 \DeclareRobustCommand{\@setspacing}{\doublespacing}
 \DeclareOption{singlespacing}{\gdef\@setspacing{\singlespacing}}
 \DeclareOption{onehalfspacing}{\gdef\@setspacing{\onehalfspacing}}
-\DeclareOption*{\PassOptionsToClass{\CurrentOption}{book}}
+\DeclareOption*{\PassOptionsToClass{\CurrentOption}{bookcover}}
 \ProcessOptions\relax
-\LoadClass[a4paper,openany,12pt]{book}
+\LoadClass[]{bookcover}
+
+\usepackage{blindtext}
+
 
 % Required packages
-\usepackage[top=2cm,left=3cm,bottom=3cm,right=3cm]{geometry}
 \usepackage{ifpdf,ifxetex,ifluatex}
 \usepackage{setspace}
 \usepackage[contents={}]{background}
@@ -151,7 +153,7 @@
     \@monthen, \@yearen
   \end{center}
   \end{singlespace}
-  \vspace{1cm}
+  \vspace{2cm}
 }
 
 \DeclareRobustCommand{\maketitlepage}{
@@ -268,117 +270,29 @@
 \def\CJKmove{\let\CJKsymbol\CJKmovesymbol
 \let\CJKpunctsymbol\CJKsymbol}
 
-\DeclareRobustCommand{\drawspine}[3]{
-  \noindent\rotatebox{-90}{
-    %\CJKfamily{spinepagefontzh}
-    \addCJKfontfeatures{RawFeature={vertical}}
-    \centering
-    \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
-      \vspace{-0.45em}
-      \fontsize{#1}{#2}\selectfont
-      \begin{CJKfilltwosides}{3.5cm}\CJKmove{\@universityzh} \\
-      \CJKmove{\@institutezh}\end{CJKfilltwosides} & &
-      \CJKmove{\fontsize{#3}{#3}\selectfont\@typezh\@classzh} & &
-      {\fontsize{#3}{#3}\selectfont\CJKmove{\@titlezh}} & &
-      {\fontsize{#3}{#3}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
-      {\fontsize{#3}{#3}\selectfont
-       \rotatebox[origin=m]{90}{\centering\@yearzh{}}
-       \rotatebox[origin=m]{90}{\centering\@monthzh{}}}
-    \end{tabular}
-  }
-}
-
-\DeclareRobustCommand{\makespine}{
-  \thispagestyle{empty}
-  \ifxetex
-    \drawspine{12}{8}{14}
-    \hspace{5cm}
-    \drawspine{10}{4}{10}
-    \hspace{5cm}
-    \drawspine{8}{4}{8}
-  \else
+\DeclareRobustCommand{\drawspine}[4]{
+  \fontsize{#4}{#4}\selectfont
+  \hspace{#1}\begin{minipage}[c]{1.4em}
     \noindent\rotatebox{-90}{
-      \hyphenpenalty=10000
-      \begin{tabular}{m{4cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
-        \fontsize{6}{4}\selectfont
-        \CJKmove{\@universityen}
-        \CJKmove{\@instituteen} & &
-        \CJKmove{\@typeen\@classen} & &
-        {\fontsize{12}{12}\selectfont\CJKmove{\@titleen}} & &
-        {\fontsize{12}{12}\selectfont\CJKmove{\@authoren{}}} & &
-        {\fontsize{10}{10}\selectfont
-         \rotatebox[origin=c]{90}{\hspace{-0.3em}\@yearen{}}
-         \rotatebox[origin=c]{90}{\hspace{-0.3em}\@monthen{}}}
+      %\CJKfamily{spinepagefontzh}
+      \addCJKfontfeatures{RawFeature={vertical}}
+      \centering
+      \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
+        \vspace{-0.45em}
+        \fontsize{#2}{#3}\selectfont
+        \begin{CJKfilltwosides}{3.5cm}\CJKmove{\@universityzh} \\
+        \CJKmove{\@institutezh}\end{CJKfilltwosides} & &
+        \CJKmove{\fontsize{#4}{#4}\selectfont\@typezh\@classzh} & &
+        {\fontsize{#4}{#4}\selectfont\CJKmove{\@titlezh}} & &
+        {\fontsize{#4}{#4}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
+        {\fontsize{#4}{#4}\selectfont
+         \rotatebox[origin=m]{90}{\centering\@yearzh{}}
+         \rotatebox[origin=m]{90}{\centering\@monthzh{}}}
       \end{tabular}
     }
-  \fi
-  \if@openright\cleardoublepage\else\clearpage\fi
+  \end{minipage}
 }
 
-\DeclareRobustCommand{\makecertification}[2][angle=0]{
-  \if@openright\cleardoublepage\else\clearpage\fi
-  %\thispagestyle{empty}
-  \phantomsection
-  \addcontentsline{toc}{chapter}{口試委員會審定書}
-  \IfFileExists{#2} {
-    \includepdf[#1]{#2}
-  } {
-    \begin{singlespace}
-    \begin{center}
-      \fontsize{24}{36}\selectfont\@universityzh\@typezh{}學位\@classzh\\
-      口試委員會審定書\par
-      \vspace{0.5cm}
-      {\fontsize{20}{30}\selectfont\@titlezh\par\@titleen\par}
-    \end{center}
-    \vspace{1cm}
-    \fontsize{15}{24}\selectfont
-    \hspace{30pt}本論文係\@authorzh{}君 (學號\@studentid)
-    在\@universityzh\@institutezh{}完成之\@typezh{}學位\@classzh，%
-    於民國 \@yearzh 年 \@monthzh 月 \@day 日%
-    承下列考試委員審查通過及口試及格，特此證明\par
-    \end{singlespace}
-    \vspace{\fill}
-    \begin{center}
-    \begin{doublespace}
-    \fontsize{15}{30}\selectfont
-    \begin{tabular}{p{2.75cm}p{12.5cm}}
-      \raisebox{30pt}{口試委員：} & \rule{11.5cm}{1pt} \\
-      & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
-      & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
-      & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
-      & \rule{5cm}{1pt}\hspace{1.5cm}\rule{5cm}{1pt} \\
-      \raisebox{5pt}{所\hspace{15pt}長：} & \rule{8.5cm}{1pt}
-    \end{tabular}
-    \end{doublespace}
-    \end{center}
-    \vspace*{-1cm}
-  }
-}
-
-\DeclareRobustCommand{\makebibliography}{
-    % Correct the bookmark of Bibliography and set up the style
-    \if@openright\cleardoublepage\else\clearpage\fi
-    \phantomsection
-    \addcontentsline{toc}{chapter}{\bibname}
-}
-
-\newenvironment{quotationpage}[1]
-  {\if@openright\cleardoublepage\else\clearpage\fi
-   \chapter*{\centerline{#1}}
-   \addcontentsline{toc}{chapter}{#1}
-   \quotation}
-  {\endquotation}
-
-\newenvironment{abstracten}
-  {\begin{quotationpage}{\@abstractnameen}}
-  {\hfill\break\textbf{Keywords: }\@keywordsen\end{quotationpage}}
-\newenvironment{abstractzh}
-  {\begin{quotationpage}{\@abstractnamezh}}
-  {\hfill\break\textbf{關鍵字：}\@keywordszh\end{quotationpage}}
-\newenvironment{acknowledgementsen}{\begin{quotationpage}{\@acknowledgementsen}}{\end{quotationpage}}
-\newenvironment{acknowledgementszh}{\begin{quotationpage}{\@acknowledgementszh}}{\end{quotationpage}}
-
-\setcounter{tocdepth}{2}
 \pagestyle{plain}
 \@setspacing
 

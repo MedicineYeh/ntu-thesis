@@ -1,0 +1,42 @@
+\documentclass[master,
+               marklength=0mm,
+               coverwidth=210mm,
+               coverheight=297mm,
+               bleedwidth=0mm,
+               spinewidth=10mm
+              ]{ntucover}
+
+% Your information goes here
+\input{ntuvars}
+
+\begin{document}
+
+%Set color to spine for debugging
+\setbookcover{bgcolor}{spine}{color=yellow!50}
+
+\setbookcover{fgfirst}{back} {%
+    \thispagestyle{empty}
+    \centering
+    % empty page
+}
+
+\setbookcover{fgfirst}{front} {%
+    \thispagestyle{empty}
+    \makecover
+}
+
+\setbookcover{fgfirst}{spine} {%
+    \hspace*{\fill}|\hspace*{\fill}
+    \vfill % Fill up the space before text
+    \centering
+    %\drawspine{-0.1em}{12}{8}{14}
+    \drawspine{-0.1em}{10}{4}{12}
+    %\drawspine{-0.1em}{9}{4}{12}
+    %\drawspine{-0.1em}{6}{4}{8}
+
+    \vfill % Fill up the space after text
+    \hspace*{\fill}|\hspace*{\fill}
+}
+
+\makebookcover
+\end{document}

@@ -10,9 +10,9 @@ DEPENDENCIES+=certification.pdf
 endif
 
 ifdef PASSWORD
-all: $(MAIN).pdf $(MAIN)-with-pass.pdf
+all: $(MAIN).pdf $(MAIN)-with-pass.pdf cover.pdf bookcover.pdf
 else
-all: $(MAIN).pdf
+all: $(MAIN).pdf cover.pdf bookcover.pdf
 endif
 
 TEXFLAG+=-halt-on-error
@@ -20,6 +20,14 @@ TEXFLAG+=-shell-escape
 
 watermark.pdf:
 	wget $(NTU_WATERMARK_LINK) -O watermark.pdf
+
+cover.pdf:	cover.tex
+	$(LATEX) $(TEXFLAG) cover.tex
+	$(LATEX) $(TEXFLAG) cover.tex
+
+bookcover.pdf:	bookcover.tex
+	$(LATEX) $(TEXFLAG) bookcover.tex
+	$(LATEX) $(TEXFLAG) bookcover.tex
 
 $(MAIN).pdf: $(DEPENDENCIES)
 	pdflatex $(TEXFLAG) $(MAIN).tex
@@ -44,6 +52,6 @@ html: $(MAIN).pdf
 	latex2html $(MAIN).tex -mkdir -dir html_output
 
 clean:
-	rm -f $(CLEANABLE) $(MAIN).pdf $(MAIN)-with-pass.pdf
+	rm -f $(CLEANABLE) $(MAIN).pdf $(MAIN)-with-pass.pdf cover.pdf bookcover.pdf
 	rm -rf _minted-* html_output
 
