@@ -21,12 +21,10 @@ TEXFLAG+=-shell-escape
 watermark.pdf:
 	wget $(NTU_WATERMARK_LINK) -O watermark.pdf
 
-cover.pdf:	cover.tex
-	$(LATEX) $(TEXFLAG) cover.tex
+cover.pdf:	cover.tex ntuthesis.cls
 	$(LATEX) $(TEXFLAG) cover.tex
 
-bookcover.pdf:	bookcover.tex
-	$(LATEX) $(TEXFLAG) bookcover.tex
+bookcover.pdf:	bookcover.tex ntucover.cls
 	$(LATEX) $(TEXFLAG) bookcover.tex
 
 $(MAIN).pdf: $(DEPENDENCIES)

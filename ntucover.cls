@@ -127,8 +127,8 @@
     \textbf{pdflatex is used only for speed.}\\
     \textbf{You can use pdflatex as a draft to check your English and format your documents.}
   \fi
-  \vspace{1cm}
-  \begin{singlespace}
+  \vspace{3cm}
+  \begin{onehalfspace}
   \begin{center}
     \fontsize{18}{27}\selectfont
     \@universityzh\@collegezh\@institutezh\par
@@ -152,40 +152,8 @@
     中華民國 \@yearzh 年 \@monthzh 月\\
     \@monthen, \@yearen
   \end{center}
-  \end{singlespace}
-  \vspace{2cm}
-}
-
-\DeclareRobustCommand{\maketitlepage}{
-  \begin{titlepage}
-    \vspace{1cm}
-    \begin{singlespace}
-    \begin{center}
-      \fontsize{18}{27}\selectfont
-      \@universityzh\@collegezh\@institutezh\par
-        \@typezh{}\@classzh\par
-      {\fontsize{14}{21}\selectfont
-        \@instituteen\par
-        \@collegeen\par}
-      {\fontsize{16}{24}\selectfont
-        \@universityen\par
-        \@typeen{} \@classen\par}
-      \vspace{\fill}
-      \@titlezh\par
-      \@titleen\par
-      \vspace{\fill}
-      \@authorzh\\
-      \@authoren\par
-      \vspace{2cm}
-      指導教授：\@advisorzh\\
-      Advisor: \@advisoren\par
-      \vspace{1.5cm}
-      中華民國 \@yearzh 年 \@monthzh 月\\
-      \@monthen, \@yearen
-    \end{center}
-    \end{singlespace}
-    \vspace{1cm}
-  \end{titlepage}
+  \end{onehalfspace}
+  \vspace{2.5cm}
 }
 
 \DeclareRobustCommand{\insertdoi}{
@@ -277,18 +245,20 @@
       %\CJKfamily{spinepagefontzh}
       \addCJKfontfeatures{RawFeature={vertical}}
       \centering
-      \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
+      \hfill
+      \begin{tabular}{m{3.5cm}m{0.5cm}m{2cm}m{0.1cm}m{12cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
         \vspace{-0.45em}
         \fontsize{#2}{#3}\selectfont
         \begin{CJKfilltwosides}{3.5cm}\CJKmove{\@universityzh} \\
         \CJKmove{\@institutezh}\end{CJKfilltwosides} & &
-        \CJKmove{\fontsize{#4}{#4}\selectfont\@typezh\@classzh} & &
+        \CJKmove{\fontsize{#2}{#2}\selectfont\@typezh\@classzh} & &
         {\fontsize{#4}{#4}\selectfont\CJKmove{\@titlezh}} & &
         {\fontsize{#4}{#4}\selectfont\CJKmove{\@authorzh{}~~撰}} & &
         {\fontsize{#4}{#4}\selectfont
          \rotatebox[origin=m]{90}{\centering\@yearzh{}}
          \rotatebox[origin=m]{90}{\centering\@monthzh{}}}
       \end{tabular}
+      \hfill
     }
   \end{minipage}
 }
