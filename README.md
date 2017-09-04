@@ -6,14 +6,14 @@
 內建開放字型(License included)，
 增加各種功能和範例程式碼讓使用快速上手。
 
-但是別忘了最後繳交時，台大要求使用__Times New Roman__和__標楷體__為標準字型，請想辦法安裝這兩個字體並且拿掉__ntuvar.tex__裡面的註解來使用這兩個字型。
+但是別忘了最後繳交時，台大要求使用`Times New Roman`和`標楷體`為標準字型，請想辦法安裝這兩個字體並且拿掉`ntuvars.tex`裡面的註解來使用這兩個字型。
 
 # 說明 (Wiki)
 請參考 [wiki](https://github.com/tzhuan/ntu-thesis/wiki) 的說明。
 
 # 編譯選項 (Make Options)
 * `make fast`
-    使用__pdflatex__編譯一次，快速的編譯出結果查看排版，但是不支援中文（只是會變亂碼，不影響）
+    使用 __pdflatex__ 編譯一次，快速的編譯出結果查看排版，但是不支援中文（只是會變亂碼，不影響）
     Use __pdflatex__ to compile (once) for reviewing the layout and results. Languages other than Chinese will be random characters which does not affect the content.
 * `make update`
     正常編譯一次，快速的編譯出結果（支援中文）
