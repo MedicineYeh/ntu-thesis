@@ -125,8 +125,8 @@
     \textbf{pdflatex is used only for speed.}\\
     \textbf{You can use pdflatex as a draft to check your English and format your documents.}
   \fi
-  \vspace{1cm}
-  \begin{singlespace}
+  \vspace*{0cm}
+  \begin{onehalfspace}
   \begin{center}
     \fontsize{18}{27}\selectfont
     \@universityzh\@collegezh\@institutezh\par
@@ -150,14 +150,14 @@
     中華民國 \@yearzh 年 \@monthzh 月\\
     \@monthen, \@yearen
   \end{center}
-  \end{singlespace}
-  \vspace{1cm}
+  \end{onehalfspace}
+  \vspace*{0cm}
 }
 
 \DeclareRobustCommand{\maketitlepage}{
   \begin{titlepage}
-    \vspace{1cm}
-    \begin{singlespace}
+    \vspace*{0cm}
+    \begin{onehalfspace}
     \begin{center}
       \fontsize{18}{27}\selectfont
       \@universityzh\@collegezh\@institutezh\par
@@ -181,8 +181,8 @@
       中華民國 \@yearzh 年 \@monthzh 月\\
       \@monthen, \@yearen
     \end{center}
-    \end{singlespace}
-    \vspace{1cm}
+    \end{onehalfspace}
+    \vspace*{0cm}
   \end{titlepage}
 }
 

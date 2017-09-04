@@ -127,7 +127,7 @@
     \textbf{pdflatex is used only for speed.}\\
     \textbf{You can use pdflatex as a draft to check your English and format your documents.}
   \fi
-  \vspace{3cm}
+  \vspace*{3cm}
   \begin{onehalfspace}
   \begin{center}
     \fontsize{18}{27}\selectfont
@@ -153,7 +153,7 @@
     \@monthen, \@yearen
   \end{center}
   \end{onehalfspace}
-  \vspace{2.5cm}
+  \vspace*{2.5cm}
 }
 
 \DeclareRobustCommand{\insertdoi}{
