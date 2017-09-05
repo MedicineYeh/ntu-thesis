@@ -273,7 +273,7 @@
     %\CJKfamily{spinepagefontzh}
     \addCJKfontfeatures{RawFeature={vertical}}
     \centering
-    \begin{tabular}{m{3.5cm}m{0.1cm}m{2cm}m{0.1cm}m{10cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
+    \begin{tabular}{m{3.5cm}m{0.5cm}m{2cm}m{0.1cm}m{12cm}m{1cm}m{2.5cm}m{0.1cm}m{1.5cm}}
       \vspace{-0.45em}
       \fontsize{#1}{#2}\selectfont
       \begin{CJKfilltwosides}{3.5cm}\CJKmove{\@universityzh} \\
@@ -291,6 +291,7 @@
 \DeclareRobustCommand{\makespine}{
   \thispagestyle{empty}
   \ifxetex
+    \vspace{-2cm}
     \drawspine{12}{8}{14}
     \hspace{5cm}
     \drawspine{10}{4}{10}
