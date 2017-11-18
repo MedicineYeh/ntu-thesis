@@ -3,7 +3,7 @@ LATEX=xelatex
 BIBTEX=bibtex
 NTU_WATERMARK_LINK=http://etds.lib.ntu.edu.tw/files/watermark.pdf
 CLEANABLE=*.aux *.log *.nav *.dvi *.out *.snm *.toc *.bbl *.blg *.lof *.lot *.spl *.lof *.lot
-DEPENDENCIES=chapters/*.tex figures/* *.tex ntuthesis.cls watermark.pdf
+DEPENDENCIES=chapters/*.tex figures/* *.tex *.bib ntuthesis.cls watermark.pdf
 
 ifneq ("$(wildcard ./certification.pdf)","")
 DEPENDENCIES+=certification.pdf
