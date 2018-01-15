@@ -10,9 +10,9 @@
 % ----------------------------------------------------------------------------
 
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{ntuthesis}[2017/09/01 Thesis template for National Taiwan University]
+\ProvidesClass{ntuthesis}[2018/01/15 Thesis template for National Taiwan University]
 \def\fileversion{v0.8}
-\def\filedate{Sep 1, 2017}
+\def\filedate{Jan 15, 2018}
 
 % Derived from book class
 \DeclareRobustCommand{\@typeen}{Master}
@@ -38,12 +38,14 @@
 \usepackage{amssymb}
 \usepackage{amsmath}
 \usepackage{amsfonts}
-\usepackage{wallpaper}
+\usepackage{eso-pic}     % for adding wallpaper watermark - \AddToShipoutPicture
+\usepackage{graphicx}    % includegraphics
+\usepackage{pgf}         % transparant wallpaper watermark, transparency package does not work on XeLaTex
 \usepackage{verbatim}
-\usepackage{lipsum}    % http://ctan.org/pkg/lipsum
-\usepackage{titletoc}  % http://ctan.org/pkg/titletoc
+\usepackage{lipsum}      % http://ctan.org/pkg/lipsum
+\usepackage{titletoc}    % http://ctan.org/pkg/titletoc
 \usepackage[normalem]{ulem} % Package for underlining
-\usepackage{tabularx}  % Provides a column type which expands to fill the specified width of the table
+\usepackage{tabularx}    % Provides a column type which expands to fill the specified width of the table
 
 \ifpdf
     \typeout{^^J *** PDF mode *** }
@@ -202,16 +204,21 @@
 \DeclareRobustCommand\removedoi{\backgroundsetup{contents={}}}
 
 \IfFileExists{watermark.pdf}{
-    \DeclareRobustCommand{\insertwatermark}{
-        \CenterWallPaper{0.174}{watermark.pdf}
-        \setlength{\wpXoffset}{6.1725cm}
-        \setlength{\wpYoffset}{10.5225cm}
+  \DeclareRobustCommand{\insertwatermark}{
+    \AddToShipoutPictureBG{%
+      \AtTextCenter{%
+        \put(\LenToUnit{4.36cm},\LenToUnit{8.17cm}){%
+          % NOTE: You can adjust the size and transparency/opacity of the watermark here.
+          \scalebox{0.5}{\pgfsetfillopacity{0.75}\includegraphics{watermark.pdf}}
+        }
+      }
     }
+  }
 }{
     \DeclareRobustCommand{\insertwatermark}{}
 }
 
-\DeclareRobustCommand\removewatermark{\ClearWallPaper}
+\DeclareRobustCommand\removewatermark{\ClearShipoutPicture}
 
 %  stolen from CJKfntef
 %
