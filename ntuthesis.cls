@@ -209,7 +209,7 @@
       \AtTextCenter{%
         \put(\LenToUnit{4.36cm},\LenToUnit{8.17cm}){%
           % NOTE: You can adjust the size and transparency/opacity of the watermark here.
-          \scalebox{0.5}{\pgfsetfillopacity{0.75}\includegraphics{watermark.pdf}}
+          \scalebox{0.5}{\pgfsetfillopacity{0.5}\includegraphics{watermark.pdf}}
         }
       }
     }
